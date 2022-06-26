@@ -4,6 +4,8 @@ import { cartSelector, setData, setInfo } from '../store/cart.slice'
 import React from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Card from '../components/Card'
+import TopSlider from '../components/TopSlider'
+import { divide } from 'lodash'
 
 
 interface Props {
@@ -24,9 +26,9 @@ const Casa: NextPage<Props> = ({ post ,infos}) => {
    window.onpopstate = () => { };
   }, [])
   
-  React.useEffect(() => {
-    dispatch(setData(post));
-  }, [post])
+  // React.useEffect(() => {
+  //   dispatch(setData(post));
+  // }, [post])
 
   React.useEffect(() => {
        dispatch(setInfo(infos))
@@ -34,17 +36,21 @@ const Casa: NextPage<Props> = ({ post ,infos}) => {
 
   console.log({info})
   return (
-    <div className="root">
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ velocity: 50 }} id="card-list-container" >
+  <>
+      <TopSlider/>
+      {/* <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ velocity: 50 }} id="card-list-container" >
 
         <ul className="card-list">
           {post?.map(item => (
             <Card key={item.id} item={item} />
           ))}
         </ul>
-      </motion.div>
-    </div>
+      </motion.div> */}
 
+      {/* {data?.map(el =>{return(
+        <div>{el.name}</div>
+      )})} */}
+</>
   )
 }
 export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {

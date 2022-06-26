@@ -30,7 +30,8 @@
     "react-player": "^2.10.0",
     "react-redux": "^7.2.6",
     "react-swipeable": "^6.2.0",
-    "sass": "^1.51.0"
+    "sass": "^1.51.0",
+    "swiper": "^8.2.4"
   },
   "devDependencies": {
     "@types/node": "17.0.18",

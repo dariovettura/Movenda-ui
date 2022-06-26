@@ -20,30 +20,30 @@ function MyApp({ Component, pageProps, router }: AppProps) {
       <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;500&family=Montserrat:ital,wght@0,100;0,200;0,300;0,500;1,100;1,200;1,500&display=swap" rel="stylesheet" />
     </Head>
     <NextSeo
-      title='Portfolio'
-      titleTemplate='Paolo Minopoli | %s'
-      defaultTitle="Paolo Minopoli"
-      description="3D Designer"
-      canonical="https://paolominopoli.vercel.app/"
+      title='Menu'
+      titleTemplate='Beer Garden | %s'
+      defaultTitle="Beer Garden"
+      description="Il giardino della birra a Napoli"
+      canonical="https://beergarden.vercel.app/"
       openGraph={{
         type: 'website',
-        url: "https://paolominopoli.vercel.app/",
-        title: "Paolo Minopoli",
-        description: "3D Designer",
+        url: "https://beergarden.vercel.app/",
+        title: "Beer Garden",
+        description: "Il giardino della birra a Napoli",
         images: [
           {
             width: 400,
             height: 400,
-            url: "https://paolominopoli.vercel.app/avatar-paolo.png",
-            alt: "Paolo Minopoli",
+            url: "https://beergarden.vercel.app/vett7.png",
+            alt: "Beer Garden",
           },
         ],
       }}
 
     />
 
-    <Header></Header>
-    <Sidebar></Sidebar>
+    {/* <Header></Header> */}
+    {/* <Sidebar></Sidebar> */}
     <CookieConsent
       contentStyle={{ margin: "0px", position: "relative" }}
       location="bottom"
@@ -62,7 +62,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
       <Component key={router.route} {...pageProps} />
 
     </AnimatePresence>
-    <Footer />
+    {/* <Footer /> */}
   </Provider>
 }
 

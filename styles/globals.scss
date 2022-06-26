@@ -3,7 +3,7 @@
 html,
 body {
   font-size: 1em;
-  overflow-x: hidden;
+  // overflow-x: hidden;
   background: $body-bg-color;
   padding: 0;
   margin: 0;
@@ -59,6 +59,30 @@ li {
   width: 100%;
   border: 1px solid $divider-color;
 }
+
+//SLIDER//SLIDER//SLIDER//SLIDER//SLIDER//SLIDER//SLIDER//SLIDER//SLIDER//SLIDER
+//SLIDER//SLIDER//SLIDER//SLIDER//SLIDER//SLIDER//SLIDER//SLIDER//SLIDER//SLIDER
+//SLIDER//SLIDER//SLIDER//SLIDER//SLIDER//SLIDER//SLIDER//SLIDER//SLIDER//SLIDER
+.stiky-wrapp{
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
+.d-swiper-container{
+ 
+  display: flex;
+  background-color: #0fa;
+}
+.swiper-slide {
+  width: 100px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.swiper-slide-active {
+color: red;
+}
+.d-shrink{width: 1000px !important;}
 
 // HEADER// HEADER// HEADER// HEADER// HEADER// HEADER// HEADER// HEADER// HEADER
 // HEADER// HEADER// HEADER// HEADER// HEADER// HEADER// HEADER// HEADER// HEADER

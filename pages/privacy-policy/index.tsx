@@ -26,9 +26,9 @@ const PrivacyPolicy: NextPage<Props> = ({ post, infos }) => {
         window.onpopstate = () => { };
     }, [])
 
-    React.useEffect(() => {
-        dispatch(setData(post));
-    }, [post])
+    // React.useEffect(() => {
+    //     dispatch(setData(post));
+    // }, [post])
 
     React.useEffect(() => {
         dispatch(setInfo(infos))
