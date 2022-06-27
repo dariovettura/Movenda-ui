@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { createRef, useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { useAppDispatch, useAppSelector } from "../store/hooks";
@@ -18,10 +18,6 @@ const TopSlider: React.FC<Props> = ({ content }) => {
   const CK = process.env.NEXT_PUBLIC_CK;
   const CS = process.env.NEXT_PUBLIC_CS;
 
-  const swiperRef = React.useRef<any>(null);
-  const [ref, inView, entry] = useInView({
-    threshold: 1,
-  })
 
   const [swiper, setSwiper] = useState<any>(null);
   const [categories, setCategories] = useState<any[]>([]);
@@ -29,6 +25,9 @@ const TopSlider: React.FC<Props> = ({ content }) => {
   const [lindex, setLindex] = useState(0);
 
 
+
+  const itemsRef = useRef<any>([]);
+  // you can access the elements with itemsRef.current[n]
 
 
 
@@ -42,17 +41,12 @@ const TopSlider: React.FC<Props> = ({ content }) => {
     await fetch(url, { method: 'GET' }).then(async res => { setCategories(await res.json()); }
     )
   }
-  // const executeScroll = () => myRef.current.scrollIntoView()    
+  const executeScroll = (i: number) => {
+    itemsRef.current[i].scrollIntoView({ behavior: 'smooth' })
+  }
   //  // run this function from an event handler or an effect to execute scroll 
-  useEffect(() => {
-    getData()
-    // if (swiper) {
-    //   setTimeout(() => { swiper.slideTo(5); }, 3000);
-    // }
 
-  }, []);
-
-  const gaga = (i: boolean, index: number) => {
+  const topBarScroll = (i: boolean, index: number) => {
     if (i) {
       console.log(index)
       if (swiper)
@@ -60,14 +54,10 @@ const TopSlider: React.FC<Props> = ({ content }) => {
     }
   }
 
-  // React.useEffect(() => {
-
-  //   if (inView) { console.log(entry) }
-
-  // }, [inView])
-
-  //   console.log(inView)
-  //   console.log(ref)
+  useEffect(() => {
+    getData()
+ }, []);
+ 
 
 
   return (<>
@@ -76,36 +66,35 @@ const TopSlider: React.FC<Props> = ({ content }) => {
       <div className="d-swiper-container">
         <Swiper
           slideToClickedSlide
+          centeredSlides
           onSwiper={(swiper) => setSwiper(swiper)}
           // pagination={true}
           // navigation={true}
           // onSwiper={(swiper) => setSwiper(swiper)}
           slidesPerView={"auto"}
-          spaceBetween={30}
+          spaceBetween={0}
           onSlideChange={() => console.log('slide change')}
-
         >
           {categories.map((item, index) => (
             <>
-              <SwiperSlide key={index}>
-
-
+              <SwiperSlide onClick={() => executeScroll(index)} key={index}>
                 {item.name}</SwiperSlide>
             </>
           ))}
-
-<SwiperSlide className="d-shrink">
-</SwiperSlide>
-
         </Swiper>
       </div>
     </div>
 
     {categories.map((item, index) => (
-      <><div ref={ref} style={{ padding: "30px" }} >
+      <>
+        <div id={`${index}`}
+          ref={el => itemsRef.current[index] = el}
+          style={{ padding: "30px", scrollMarginTop: "50px" }} >
 
-        <InView onChange={(inView) => gaga(inView, index)} style={{ height: "300px", backgroundColor: "red" }} key={index}>{item.name}</InView>
-      </div>
+          <InView onChange={(inView) => topBarScroll(inView, index)}
+            style={{ height: "300px", backgroundColor: "red" }}
+            key={index}>{item.name}</InView>
+        </div>
       </>
     ))}
   </>
