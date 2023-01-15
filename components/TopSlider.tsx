@@ -4,11 +4,10 @@ import 'swiper/css';
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { cartSelector, setData } from "../store/cart.slice";
 import { InView, useInView } from "react-intersection-observer";
+import axios from "axios";
 
 interface Props {
-
   content?: any,
-
 }
 
 const TopSlider: React.FC<Props> = ({ content }) => {
@@ -17,7 +16,6 @@ const TopSlider: React.FC<Props> = ({ content }) => {
 
   const CK = process.env.NEXT_PUBLIC_CK;
   const CS = process.env.NEXT_PUBLIC_CS;
-
 
   const [swiper, setSwiper] = useState<any>(null);
   const [categories, setCategories] = useState<any[]>([]);
@@ -38,7 +36,8 @@ const TopSlider: React.FC<Props> = ({ content }) => {
     CS;
 
   const getData = async () => {
-    await fetch(url, { method: 'GET' }).then(async res => { setCategories(await res.json()); }
+    await axios.get('api/hello')
+    .then(async res => { setCategories(res.data); }
     )
   }
   const executeScroll = (i: number) => {
@@ -56,8 +55,8 @@ const TopSlider: React.FC<Props> = ({ content }) => {
 
   useEffect(() => {
     getData()
- }, []);
- 
+  }, []);
+
 
 
   return (<>
@@ -90,7 +89,6 @@ const TopSlider: React.FC<Props> = ({ content }) => {
         <div id={`${index}`}
           ref={el => itemsRef.current[index] = el}
           style={{ padding: "30px", scrollMarginTop: "50px" }} >
-
           <InView onChange={(inView) => topBarScroll(inView, index)}
             style={{ height: "300px", backgroundColor: "red" }}
             key={index}>{item.name}</InView>

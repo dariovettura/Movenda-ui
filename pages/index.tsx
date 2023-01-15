@@ -2,89 +2,36 @@ import type { GetStaticPropsResult, NextPage } from 'next'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { cartSelector, setData, setInfo } from '../store/cart.slice'
 import React from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
-import Card from '../components/Card'
 import TopSlider from '../components/TopSlider'
-import { divide } from 'lodash'
+
 
 
 interface Props {
 
   post?: any[],
-  infos?:any[]
+  infos?: any[]
 
 }
 
-const Casa: NextPage<Props> = ({ post ,infos}) => {
-  const { data ,info } = useAppSelector(cartSelector)
-  console.log({post})
+const Casa: NextPage<Props> = ({ post, infos }) => {
+  const { data, info } = useAppSelector(cartSelector)
+  console.log({ post })
 
   const dispatch = useAppDispatch()
 
-
   React.useEffect(() => {
-   window.onpopstate = () => { };
+    window.onpopstate = () => { };
   }, [])
-  
-  // React.useEffect(() => {
-  //   dispatch(setData(post));
-  // }, [post])
 
   React.useEffect(() => {
-       dispatch(setInfo(infos))
- }, [])
+    dispatch(setInfo(infos))
+  }, [])
 
-  console.log({info})
   return (
-  <>
-      <TopSlider/>
-      {/* <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ velocity: 50 }} id="card-list-container" >
-
-        <ul className="card-list">
-          {post?.map(item => (
-            <Card key={item.id} item={item} />
-          ))}
-        </ul>
-      </motion.div> */}
-
-      {/* {data?.map(el =>{return(
-        <div>{el.name}</div>
-      )})} */}
-</>
+    <>
+      <TopSlider />
+    </>
   )
 }
-export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
 
-  
-
-  const url =
-    "https://paolominopoli.altervista.org/wp-json/wp/v2/posts?_embed&per_page=100";
-    const infourl =
-    "https://paolominopoli.altervista.org/wp-json/wp/v2/informazioni?_embed&per_page=100";
-
-  //const result = await Axios.get(url);
-  //const menu =  result.data
-
-  const res = await fetch(url,{method:'GET'});
-  const infores = await fetch(infourl,{method:'GET'});
-
-  const post = await res.json();
-  const infos = await infores.json()
-
-  //  const res = await fetch('https://.../posts')
-  // const posts = await res.json()
-
-  // By returning { props: { posts } }, the Blog component
-  // will receive `posts` as a prop at build time
-  return {
-    props: {
-      post,
-      infos
-
-    },
-    revalidate: 10,
-  };
-}
 export default Casa

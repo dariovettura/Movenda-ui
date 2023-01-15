@@ -4,12 +4,9 @@ import type { AppProps } from 'next/app'
 import { Provider } from "react-redux"
 import { store } from '../store/index'
 import Head from 'next/head';
-import Header from '../components/Header';
-import Sidebar from '../components/Sidebar';
 import { NextSeo } from 'next-seo';
-import CookieConsent from 'react-cookie-consent';
-import Link from 'next/link';
-import Footer from '../components/Footer';
+
+
 
 
 function MyApp({ Component, pageProps, router }: AppProps) {
@@ -20,49 +17,14 @@ function MyApp({ Component, pageProps, router }: AppProps) {
       <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;500&family=Montserrat:ital,wght@0,100;0,200;0,300;0,500;1,100;1,200;1,500&display=swap" rel="stylesheet" />
     </Head>
     <NextSeo
-      title='Menu'
-      titleTemplate='Beer Garden | %s'
-      defaultTitle="Beer Garden"
-      description="Il giardino della birra a Napoli"
-      canonical="https://beergarden.vercel.app/"
-      openGraph={{
-        type: 'website',
-        url: "https://beergarden.vercel.app/",
-        title: "Beer Garden",
-        description: "Il giardino della birra a Napoli",
-        images: [
-          {
-            width: 400,
-            height: 400,
-            url: "https://beergarden.vercel.app/vett7.png",
-            alt: "Beer Garden",
-          },
-        ],
-      }}
-
+      title='Food Menu ui'
+      titleTemplate='Food Menu ui | %s'
+      defaultTitle="Food Menu ui"
+      description="Food Menu ui"
     />
-
-    {/* <Header></Header> */}
-    {/* <Sidebar></Sidebar> */}
-    <CookieConsent
-      contentStyle={{ margin: "0px", position: "relative" }}
-      location="bottom"
-      buttonText="Ok,Ho capito."
-      cookieName="myAwesomeCookieName2"
-      style={{ background: "#000", fontSize: "13px", fontWeight: 800 }}
-      buttonStyle={{ color: "#fff", fontWeight: 800, fontSize: "13px", background: "#008069", margin: "5px" }}
-      expires={150}
-    >
-      Questo sito usa cookies per migliorare la tua esperienza di navigazione.
-      <Link href="/privacy-policy"><span style={{ fontSize: "13px", color: "#008069", textDecoration: "underline" }} >Vedi cookies e privacy policy</span></Link>
-    </CookieConsent>
-
-
     <AnimatePresence exitBeforeEnter >
       <Component key={router.route} {...pageProps} />
-
     </AnimatePresence>
-    {/* <Footer /> */}
   </Provider>
 }
 
